@@ -1,21 +1,5 @@
 # EmguFaceDetectionWPF
-A Face Detection App in WPF using Emgu CV. This app aims to be a base app for all your face detection needs. 
-
-**Features:**
-* MVVM Pattern for scalibility.
-* SQLite Database, no further configs. You can still migrate to other database engines. The SQL structure's at `DbConstants`
-* Ability to take **Time Logs**
-* Ability to add user.
-* Ability to view logs, and filter.
-
-**ToDo:**
-* Add ability to edit users
-* Add ability to view user's image on logs view
-
-**Images:**
-![Monitoring View][sc1]
-![Logs View][sc2]
-![Add User][sc3]
+A simple face detection app using EmguCV and WPF.
 
 **References:**
 * [Emgu CV][Ref 1] - face detection engine

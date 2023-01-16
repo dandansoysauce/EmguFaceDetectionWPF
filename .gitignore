@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/EmguFaceDetectionWPF
+/EmguFaceDetectionWPF/obj
+/EmguFaceDetectionWPF/bin/Debug
+/emgudb.sqlite
+/MigrationBackup/1853a47d/EmguFaceDetectionWPF/NuGetUpgradeLog.html
+/MigrationBackup/1853a47d/EmguFaceDetectionWPF

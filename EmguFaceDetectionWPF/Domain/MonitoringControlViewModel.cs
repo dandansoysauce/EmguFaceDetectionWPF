@@ -16,7 +16,7 @@ namespace EmguFaceDetectionWPF.Domain
 {
     public class MonitoringControlViewModel : ViewModelBase
     {
-        private Capture _capture;
+        private VideoCapture _capture;
         private CascadeClassifier _haarCascade;
         private Image<Bgr, byte> _currentFrame;
         private Image<Gray, byte> _result;
@@ -63,7 +63,7 @@ namespace EmguFaceDetectionWPF.Domain
             {
                 try
                 {
-                    _capture = new Capture();
+                    _capture = new VideoCapture();
                     _haarCascade = new CascadeClassifier(@"haarcascade_frontalface_default.xml");
                     _timer = new DispatcherTimer(TimeSpan.FromMilliseconds(1), DispatcherPriority.ApplicationIdle,
                          (s, ev) => FrameGrabber(), Application.Current.Dispatcher);

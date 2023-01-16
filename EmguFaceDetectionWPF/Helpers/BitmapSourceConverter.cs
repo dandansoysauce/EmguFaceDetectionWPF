@@ -17,9 +17,9 @@ namespace EmguFaceDetectionWPF.Helpers
         [DllImport("gdi32")]
         private static extern int DeleteObject(IntPtr o);
 
-        public static BitmapSource ToBitmapSource(IImage image)
+        public static BitmapSource ToBitmapSource(Mat image)
         {
-            using (System.Drawing.Bitmap source = image.Bitmap)
+            using (System.Drawing.Bitmap source = image.ToBitmap())
             {
                 IntPtr ptr = source.GetHbitmap(); //obtain the Hbitmap
 

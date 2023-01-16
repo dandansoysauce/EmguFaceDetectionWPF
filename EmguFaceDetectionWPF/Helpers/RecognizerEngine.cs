@@ -29,20 +29,21 @@ namespace EmguFaceDetectionWPF.Helpers
         public bool TrainRecognizer()
         {
             var allUsers = db.GetUsers(DbConstants.ALL_USERS_KEY);
+
             if (allUsers != null)
             {
-                var faceImages = new List<Image<Gray, byte>>();
+                var faceImages = new List<Mat>();
                 var faceLabels = new List<int>();
                 for (int i = 0; i < allUsers.Count; i++)
                 {
                     Stream stream = new MemoryStream();
                     stream.Write(allUsers[i].Face, 0, allUsers[i].Face.Length);
-                    var faceImage = new Image<Gray, byte>(new Bitmap(stream));
-                    faceImages.Add(faceImage.Resize(100, 100, Inter.Cubic));
+                    var faceImage = (new Bitmap(stream)).ToImage<Gray, byte>();
+                    faceImages.Add(faceImage.Resize(100, 100, Inter.Cubic).Mat);
                     faceLabels.Add(allUsers[i].Uid);
                 }
                 faceRecognizer.Train(faceImages.ToArray(), faceLabels.ToArray());
-                faceRecognizer.Save(recognizerPath);
+                faceRecognizer.Write(recognizerPath);
             }
 
             return true;
@@ -50,14 +51,21 @@ namespace EmguFaceDetectionWPF.Helpers
 
         public void LoadRecognizerData()
         {
-            faceRecognizer.Load(recognizerPath);
+            faceRecognizer.Read(recognizerPath);
         }
 
         public int RecognizeUser(Image<Gray, byte> userImage)
         {
-            faceRecognizer.Load(recognizerPath);
-            var res = faceRecognizer.Predict(userImage.Resize(100, 100, Inter.Cubic));
-            return res.Label;
+            try
+            {
+                faceRecognizer.Read(recognizerPath);
+                var res = faceRecognizer.Predict(userImage.Resize(100, 100, Inter.Cubic));
+                return res.Label;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
     }
 }
